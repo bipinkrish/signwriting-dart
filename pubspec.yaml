@@ -1,0 +1,16 @@
+name: signwriting
+description: Dart utilities for SignWriting formats, tokenizer and visualizer.
+version: 1.0.0
+repository: https://github.com/bipinkrish/signwriting
+
+environment:
+  sdk: ^3.0.0
+
+dependencies:
+  image: ^4.1.7
+  path: ^1.9.0
+  tuple: ^2.0.2
+
+dev_dependencies:
+  lints: ^2.0.0
+  test: ^1.21.0
