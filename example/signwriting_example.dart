@@ -4,8 +4,8 @@ void main() {
   print(fswToSign("M123x456S1f720487x492"));
   // Sign { box: SignSymbol { symbol: 'M', position: [123, 456] }, symbols: [SignSymbol { symbol: 'S1f720', position: [487, 492] }] }
 
-  // // Not working yet
-  // print(swu2fsw('𝠃𝤟𝤩񋛩𝣵𝤐񀀒𝤇𝣤񋚥𝤐𝤆񀀚𝣮𝣭'));
+  print(swu2fsw('𝠃𝤟𝤩񋛩𝣵𝤐񀀒𝤇𝣤񋚥𝤐𝤆񀀚𝣮𝣭'));
+  // M525x535S2e748483x510S10011501x466S2e704510x500S10019476x475
 
   SignWritingTokenizer tokenizer = SignWritingTokenizer();
   String fsw = 'M123x456S1f720487x492S1f720487x492';

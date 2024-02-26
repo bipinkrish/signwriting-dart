@@ -1,4 +1,4 @@
-# Signwriting
+# SignWriting
 
 [![pub package](https://img.shields.io/pub/v/signwriting.svg)](https://pub.dev/packages/signwriting)
 
@@ -6,7 +6,7 @@ This is dart implementation of its [python counterpart](https://github.com/sign-
 
 ## Features
 
-- ✔️ Formats (*Currently SWU to FSW is not working*)
+- ✔️ Formats
 - ✔️ Tokenizer
 - ❌ Visualizer
 - ✔️ Utils
@@ -27,8 +27,8 @@ print(fswToSign("M123x456S1f720487x492"));
 2. To convert a SignWriting string in SWU format to FSW format:
 
 ```dart
-// // Not working yet
 print(swu2fsw('𝠃𝤟𝤩񋛩𝣵𝤐񀀒𝤇𝣤񋚥𝤐𝤆񀀚𝣮𝣭'));
+// M525x535S2e748483x510S10011501x466S2e704510x500S10019476x475
 ```
 
 ### Tokenizer

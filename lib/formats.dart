@@ -71,22 +71,9 @@ String signToFsw(Sign sign) {
 
 // SWU 2 FSW
 
-class RegexPatterns {
-  static final Map<String, String> reSwu = {
-    'symbol': '[\u{40001}-\u{4FFFF}]',
-    'coord': '[\u{1D80C}-\u{1DFFF}]{2}',
-    'sort': '\u{1D800}',
-    'box': '\u{1D801}-\u{1D804}'
-  };
-
-  static final RegExp prefix =
-      RegExp('${reSwu['sort']}(?:${reSwu['symbol']})+');
-  static final RegExp spatial = RegExp('${reSwu['symbol']}${reSwu['coord']}');
-  static final RegExp signbox =
-      RegExp('${reSwu['box']}${reSwu['coord']}(?:${reSwu['spatial']})*');
-  static final RegExp sign = RegExp('${reSwu['prefix']}?${reSwu['signbox']}');
-  static final RegExp sortable =
-      RegExp('${reSwu['prefix']}${reSwu['signbox']}');
+class ReSwu {
+  static const String symbol = r'[\u{40001}-\u{4FFFF}]';
+  static const String coord = r'[\u{1D80C}-\u{1DFFF}]{2}';
 }
 
 String swu2fsw(String swuText) {
@@ -103,21 +90,23 @@ String swu2fsw(String swuText) {
       .replaceAll("𝠄", "R");
 
   // SWU symbols to FSW keys
-  RegExp symbolRegex = RegExp(RegexPatterns.reSwu['symbol']!);
-  Iterable<Match> symbols = symbolRegex.allMatches(fsw);
+  RegExp symbolRegex = RegExp(ReSwu.symbol, unicode: true);
+  Iterable<RegExpMatch> symbols = symbolRegex.allMatches(fsw);
   if (symbols.isNotEmpty) {
-    for (Match sym in symbols) {
+    for (RegExpMatch sym in symbols) {
       fsw = fsw.replaceAll(sym.group(0)!, swu2key(sym.group(0)!));
     }
   }
 
   // SWU coordinates to FSW coordinates
-  RegExp coordRegex = RegExp(RegexPatterns.reSwu['coord']!);
-  Iterable<Match> coords = coordRegex.allMatches(fsw);
+  RegExp coordRegex = RegExp(ReSwu.coord, unicode: true);
+  Iterable<RegExpMatch> coords = coordRegex.allMatches(fsw);
   if (coords.isNotEmpty) {
-    for (Match coord in coords) {
+    for (RegExpMatch coord in coords) {
       fsw = fsw.replaceAll(
-          coord.group(0)!, swu2coord(coord.group(0)!).toString());
+        coord.group(0)!,
+        swu2coord(coord.group(0)!).join('x'),
+      );
     }
   }
 
@@ -137,5 +126,5 @@ int swu2num(String swuNum) {
 }
 
 List<int> swu2coord(String swuCoord) {
-  return [swu2num(swuCoord[0]), swu2num(swuCoord[1])];
+  return [swu2num(swuCoord.substring(0, 2)), swu2num(swuCoord.substring(2, 4))];
 }

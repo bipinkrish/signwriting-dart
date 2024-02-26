@@ -13,13 +13,12 @@ void main() {
     });
   });
 
-  // // This is failing
-  // group('SWU to FSW Test', () {
-  //   test('Conversion', () {
-  //     String swu = '𝠀񀀒񀀚񋚥񋛩𝠃𝤟𝤩񋛩𝣵𝤐񀀒𝤇𝣤񋚥𝤐𝤆񀀚𝣮𝣭';
-  //     String fsw = swu2fsw(swu);
-  //     expect(fsw,
-  //         'AS10011S10019S2e704S2e748M525x535S2e748483x510S10011501x466S2e704510x500S10019476x475');
-  //   });
-  // });
+  group('SWU to FSW Test', () {
+    test('Conversion', () {
+      String swu = '𝠀񀀒񀀚񋚥񋛩𝠃𝤟𝤩񋛩𝣵𝤐񀀒𝤇𝣤񋚥𝤐𝤆񀀚𝣮𝣭';
+      String fsw = swu2fsw(swu);
+      expect(fsw,
+          'AS10011S10019S2e704S2e748M525x535S2e748483x510S10011501x466S2e704510x500S10019476x475');
+    });
+  });
 }
