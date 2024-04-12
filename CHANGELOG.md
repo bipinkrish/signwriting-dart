@@ -11,3 +11,7 @@
 ## 1.2.0
 
 - Remove assets
+
+## 1.2.0
+
+- Minor fix
