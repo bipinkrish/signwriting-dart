@@ -8,3 +8,6 @@
 - SWU to FSW
 - Documentation
 
+## 1.2.0
+
+- Remove assets

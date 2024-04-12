@@ -8,7 +8,7 @@ This is dart implementation of its [python counterpart](https://github.com/sign-
 
 - ✔️ Formats
 - ✔️ Tokenizer
-- ❌ Visualizer
+- ❌ Visualizer ([implemented here](https://pub.dev/packages/signwriting_flutter))
 - ✔️ Utils
 
 ## Usage
@@ -68,12 +68,11 @@ print(normalizeSignWriting(fsw));
 
 ### Visualizer
 
-*Not implemented yet*
+([implemented here](https://pub.dev/packages/signwriting_flutter))
 
 This module is used to visualize SignWriting strings as images. Unlike [sutton-signwriting/font-db](https://github.com/sutton-signwriting/font-db/) which it is based on, this module does not support custom styling. Benchmarks show that this module is ~5000x faster than the original implementation.
 
 ```dart
-// // Not implemented yet
 String fsw = "AS10011S10019S2e704S2e748M525x535S2e748483x510S10011501x466S20544510x500S10019476x475";
 signwritingToImage(fsw);
 ```
@@ -91,7 +90,3 @@ String resultSign = joinSigns(fsws: [charA, charB]);
 print(resultSign);
 // M500x500S1f720487x493S14720493x508
 ```
-
-## References
-
-[SignBank+: Preparing a Multilingual Sign Language Dataset for Machine Translation Using Large Language Models.](https://arxiv.org/abs/2309.11566)

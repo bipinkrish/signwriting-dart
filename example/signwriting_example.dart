@@ -22,11 +22,6 @@ void main() {
   print(normalizeSignWriting(fsw));
   // M123x456S1f720487x492S1f720487x492
 
-  // // Not implemented yet
-  // String fsw =
-  //     "AS10011S10019S2e704S2e748M525x535S2e748483x510S10011501x466S20544510x500S10019476x475";
-  // signwritingToImage(fsw);
-
   String charA = 'M507x507S1f720487x492';
   String charB = 'M507x507S14720493x485';
   String resultSign = joinSigns(fsws: [charA, charB]);

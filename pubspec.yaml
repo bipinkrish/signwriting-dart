@@ -1,6 +1,6 @@
 name: signwriting
 description: Dart utilities for SignWriting formats, tokenizer and visualizer.
-version: 1.1.0
+version: 1.2.0
 repository: https://github.com/bipinkrish/signwriting-dart
 topics:
   - sign
