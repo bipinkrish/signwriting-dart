@@ -141,7 +141,7 @@ print(mouthIpa('ɑː ɛ'));
 // M541x518S34c00459x482S34a00505x482
 ```
 
-To mouth a written word, supply your own grapheme-to-IPA function (Python's `epitran` has no Dart port yet):
+To mouth a written word, supply your own grapheme-to-IPA function (Python's `epitran` has no Dart port)
 
 ```dart
 final result = mouth('hello', g2p: (word) => myG2p(word));
