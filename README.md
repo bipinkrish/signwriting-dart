@@ -9,7 +9,7 @@ This is dart implementation of its [python counterpart](https://github.com/sign-
 - ✔️ Formats
 - ✔️ Tokenizer
 - ❌ Visualizer ([implemented here](https://pub.dev/packages/signwriting_flutter))
-- ✔️ Utils (join, metrics, mirror)
+- ✔️ Utils (join, metrics, mirror, canonicalize)
 - ✔️ Fingerspelling
 - ✔️ Mouthing (IPA → SignWriting)
 
@@ -119,6 +119,17 @@ print(mirrorSymbol('S10000'));
 print(mirrorSign('M507x507S1f720487x492'));
 // M513x507S1f728493x492
 ```
+
+### Canonicalize
+
+`canonicalize` rewrites each sign with its symbols in a canonical order, centered on 500x500, with a tight box.
+
+```dart
+print(canonicalize('M518x529S14c20480x471S27106503x489'));
+// M519x529S14c20481x471S27106504x489
+```
+
+> Note: the relative draw order of *overlapping* symbols is not preserved (that needs a font renderer); for non-overlapping signs the output matches the Python package exactly.
 
 ### Fingerspelling
 

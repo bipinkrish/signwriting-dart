@@ -1,3 +1,7 @@
+## 1.4.0
+
+- Add `canonicalize` — reorders a sign's symbols into a canonical order, centered with a tight box (pure Dart; matches the Python reference for non-overlapping signs)
+
 ## 1.3.0
 
 - Add FSW → SWU conversion (`fsw2swu`, `mark2swu`, `num2swu`, `position2swu`), completing the FSW ↔ SWU round-trip

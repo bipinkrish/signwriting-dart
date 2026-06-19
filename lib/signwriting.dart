@@ -2,6 +2,7 @@ library;
 
 export 'types.dart';
 export 'formats.dart';
+export 'canonicalize.dart';
 export 'fingerspelling.dart';
 export 'metrics.dart';
 export 'mirror.dart';

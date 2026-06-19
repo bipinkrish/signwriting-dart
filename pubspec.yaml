@@ -1,6 +1,6 @@
 name: signwriting
 description: Dart utilities for SignWriting - formats, tokenizer, mirror, fingerspelling, mouthing, joins and metrics.
-version: 1.3.0
+version: 1.4.0
 repository: https://github.com/bipinkrish/signwriting-dart
 topics:
   - sign
