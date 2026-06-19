@@ -8,7 +8,7 @@ class SignSymbol {
   /// Constructor for SignSymbol class.
   ///
   /// [symbol]: Symbol identifier.
-  /// [position]: Position coordinates as a Tuple2<int, int>.
+  /// [position]: Position coordinates as a `Tuple2<int, int>`.
   SignSymbol({required this.symbol, required this.position});
 
   /// Returns a string representation of the SignSymbol object.

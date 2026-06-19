@@ -9,7 +9,9 @@ This is dart implementation of its [python counterpart](https://github.com/sign-
 - ✔️ Formats
 - ✔️ Tokenizer
 - ❌ Visualizer ([implemented here](https://pub.dev/packages/signwriting_flutter))
-- ✔️ Utils
+- ✔️ Utils (join, metrics, mirror)
+- ✔️ Fingerspelling
+- ✔️ Mouthing (IPA → SignWriting)
 
 ## Usage
 
@@ -24,11 +26,14 @@ print(fswToSign("M123x456S1f720487x492"));
 // Sign { box: SignSymbol { symbol: 'M', position: [123, 456] }, symbols: [SignSymbol { symbol: 'S1f720', position: [487, 492] }] }
 ```
 
-2. To convert a SignWriting string in SWU format to FSW format:
+2. To convert a SignWriting string between SWU and FSW formats (both directions):
 
 ```dart
 print(swu2fsw('𝠃𝤟𝤩񋛩𝣵𝤐񀀒𝤇𝣤񋚥𝤐𝤆񀀚𝣮𝣭'));
 // M525x535S2e748483x510S10011501x466S2e704510x500S10019476x475
+
+print(fsw2swu('M525x535S2e748483x510S10011501x466S2e704510x500S10019476x475'));
+// 𝠃𝤟𝤩񋛩𝣵𝤐񀀒𝤇𝣤񋚥𝤐𝤆񀀚𝣮𝣭
 ```
 
 ### Tokenizer
@@ -81,12 +86,64 @@ signwritingToImage(fsw);
 
 This module includes general utilities that were not covered in the other modules.
 
-1. `join_signs` joins a list of signs into a single sign. This is useful for example for fingerspelling words out of individual character signs.
+1. `joinSignsVertical` / `joinSignsHorizontal` join a list of signs into a single sign. This is useful for example for fingerspelling words out of individual character signs.
 
 ```dart
 String charA = 'M507x507S1f720487x492';
 String charB = 'M507x507S14720493x485';
-String resultSign = joinSigns(fsws: [charA, charB]);
-print(resultSign);
-// M500x500S1f720487x493S14720493x508
+
+print(joinSignsVertical([charA, charB]));
+// M510x518S1f720487x481S14720493x496
+
+print(joinSignsHorizontal([charA, charB]));
+// M517x511S1f720483x492S14720503x485
+```
+
+2. `signFromSymbols` builds a tightly-boxed sign (centered on 500x500) from a list of symbols.
+
+3. `getSymbolSize` returns the rendered size of a symbol, and `signwritingBox` recomputes a sign's tight bounding box — both without needing a font renderer.
+
+```dart
+print(getSymbolSize('S2e748'));
+// [16, 26]
+```
+
+### Mirror
+
+`mirrorSymbol` and `mirrorSign` produce the horizontal mirror of a symbol or a full FSW sign.
+
+```dart
+print(mirrorSymbol('S10000'));
+// S10008
+
+print(mirrorSign('M507x507S1f720487x492'));
+// M513x507S1f728493x492
+```
+
+### Fingerspelling
+
+Spell words letter-by-letter as SignWriting, for 23 signed languages. `spell` handles a single word; `spellText` handles full text (returns `null` if any character is unmappable).
+
+```dart
+print(spell('abc', language: 'ase'));
+// M510x533S1f720487x466S14720493x486S16d20491x513
+
+print(spellText('a b', language: 'ase'));
+// M510x507S1f720487x492 M507x511S14720493x489
+```
+
+### Mouthing
+
+Convert IPA (mouth shapes / Mundbildschrift) to SignWriting.
+
+```dart
+print(mouthIpa('ɑː ɛ'));
+// M541x518S34c00459x482S34a00505x482
+```
+
+To mouth a written word, supply your own grapheme-to-IPA function (Python's `epitran` has no Dart port — see [EPITRAN_PORT.md](EPITRAN_PORT.md)):
+
+```dart
+final result = mouth('hello', g2p: (word) => myG2p(word));
+print(result.fsw);
 ```

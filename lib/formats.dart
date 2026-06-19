@@ -135,3 +135,61 @@ int swu2num(String swuNum) {
 List<int> swu2coord(String swuCoord) {
   return [swu2num(swuCoord.substring(0, 2)), swu2num(swuCoord.substring(2, 4))];
 }
+
+// ---------------------------------------------------------------------------
+// FSW -> SWU (inverse of swu2fsw)
+// ---------------------------------------------------------------------------
+
+// FSW box/prefix marks to their SWU code points.
+const Map<String, int> _fswMarkToSwu = {
+  'A': 0x1D800,
+  'B': 0x1D801,
+  'L': 0x1D802,
+  'M': 0x1D803,
+  'R': 0x1D804,
+};
+
+// Function to convert an FSW mark (A/B/L/M/R) to its SWU character.
+String mark2swu(String fswMark) {
+  return String.fromCharCode(_fswMarkToSwu[fswMark]!);
+}
+
+// Function to convert a numeric position value to an SWU number character
+// (inverse of swu2num).
+String num2swu(int num) {
+  return String.fromCharCode(num - 250 + 0x1D80C);
+}
+
+// Function to convert a numeric coordinate pair to an SWU coordinate string.
+String position2swu(int x, int y) {
+  return '${num2swu(x)}${num2swu(y)}';
+}
+
+// Function to convert an FSW string to an SWU string.
+String fsw2swu(String fswText) {
+  if (fswText.isEmpty) {
+    return '';
+  }
+
+  String swu = fswText;
+
+  // Replacing FSW marks with SWU mark characters.
+  _fswMarkToSwu.forEach((mark, code) {
+    swu = swu.replaceAll(mark, String.fromCharCode(code));
+  });
+
+  // Replacing FSW symbol keys (S + 5 hex) with SWU symbol characters.
+  swu = swu.replaceAllMapped(
+    RegExp(r'S[0-9a-f]{3}[0-5][0-9a-f]'),
+    (match) => key2swu(match.group(0)!),
+  );
+
+  // Replacing FSW coordinates (NNNxNNN) with SWU coordinate characters.
+  swu = swu.replaceAllMapped(
+    RegExp(r'(\d{3})x(\d{3})'),
+    (match) =>
+        position2swu(int.parse(match.group(1)!), int.parse(match.group(2)!)),
+  );
+
+  return swu;
+}
